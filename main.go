@@ -2,21 +2,14 @@ package main
 
 import (
 	"fmt"
-	// "io"
     "io/ioutil"
 	"os"
 	"html/template"
 	"log"
 	"strings"
-	// "bytes"
-    // "path/filepath"
+
 )
 
-// func check(e error) {
-//     if err != nil {
-//         panic(err)
-//     }
-// }
 func templateTo(path string) {
 	temp, err := template.ParseFiles(path)
 	if err != nil {
@@ -30,11 +23,6 @@ func templateTo(path string) {
 		return
 	}
 
-	// A sample config
-	// config := map[string]string{
-	// 	"textColor":      "#abcdef",
-	// 	"linkColorHover": "#ffaacc",
-	// }
 	config := "change this text"
 
 	err = temp.Execute(file, config)
@@ -53,25 +41,13 @@ func createFile(name string) {
 	}
 }
 
-// func fileToTemplate() {
-// 	t := template.Must(template.New("template.tmpl").ParseFiles("template.tmpl"))
-// 	newfilea, newfileb := fileToTemplate(filename)
-// 	err = t.Execute(newfileb)
-// 	if err != nil {
-// 		panic(err)
-// 	}
-// }
-
 type content struct {
 	FileData 	string
 }
 
-// generate new template -good
+// generate new template
 func fileToTemplate(filename string) (string, *os.File) {
 	filename = strings.Split(filename, ".")[0] + ".html" // adds .html extension
-	// bytesToWrite := []byte(temp)
-	// con := content{FileData: readFile(cont)}
-	// err := ioutil.WriteFile(filename, bytesToWrite, 0644)
 	file, err := os.Create("project/file.html")
 	if err != nil {
 		panic(err)
@@ -79,21 +55,23 @@ func fileToTemplate(filename string) (string, *os.File) {
 	return filename, file
 }
 
-func main() {
-	var count int
-	fmt.Print(` Enter the amount of html pages 
-you want to generate: `)
-	fmt.Scanf("%s", &count)
+func temp() {
+	newtemp := template.Must(template.New("template.tmpl").ParseFiles("template.tmpl"))
+	file := "file"
+	_, newfileb := fileToTemplate(file)
+	err := newtemp.Execute(newfileb, &content{"Change this text"})
+	if err != nil {
+		panic(err)
+	}
+}
 
-	// creating new directory to store files
+func main() {	
+	fmt.Print("Welcome to Fetch Project. A static project generator.\n")
+	fmt.Print("Your new project was generated in the directory.\n")
     err := os.Mkdir("project", 0755)
     if err != nil {
         panic(err)
     }
-
-    // defer os.RemoveAll("subdir")
-
-    // createFile("project/file.html")
 
     err = os.MkdirAll("project/js", 0755)
     if err != nil {
@@ -106,26 +84,5 @@ you want to generate: `)
 
     createFile("project/css/main.css")
     createFile("project/js/main.js")
-
-	
-	// newfile := WriteFile(filename)
-	// newtemp := template.New("file.html")
-	// newtemp, _ = newtemp.ParseFiles("template.tmpl")
-	newtemp := template.Must(template.New("template.tmpl").ParseFiles("template.tmpl"))
-	file := "file"
-	newfilea, newfileb := fileToTemplate(file)
-	err = newtemp.Execute(newfileb, &content{"Change this text"})
-	if err != nil {
-		panic(err)
-	}
-	fmt.Print(newfilea, " created")
-	// file = os.Create("project/file.html")
-	// "project/file.html"
-	// file, _ := os.Create("project/file.html")
-	// file.Write([]byte("Change this text"))
-	// file.Close()
-	// templateTo("template.tmpl")
-	// file, _ = os.Open("project/file.html")
-	// io.Copy(os.Stdout, file)
-	// file.Close()
+	temp()
 }
