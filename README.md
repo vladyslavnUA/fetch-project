@@ -13,6 +13,7 @@
 
 <p align="center">
   <a href="#about">About</a> •
+  <a href="#pitch">Pitch</a> •
   <a href="#installation">Installation</a> •
   <a href="#structure">Structure</a> •
   <a href="#contributing">Contributing</a> •
@@ -23,6 +24,9 @@
 ## About
 
 Fetch Project was made with the intent to save time everytime you start a new project. Each directory comes equipped with assets (css and js) and a root html file
+
+## Pitch
+My pitchdeck for this project can be found [here](https://docs.google.com/presentation/d/1fK8obhFOXMXwkZMCJH_MIGSmpSLam7zvcBbY0SkKgsg/edit?usp=sharing).
 
 ## Installation
 ```
